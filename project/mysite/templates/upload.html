@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'assets/css/upload.css' %}" />
+    </head>
+
+    <div class="container">
+        
+        <div class="card">
+          <h3>Upload Files</h3>
+          <div class="drop_box">
+            <header>
+              <h4>Select File here</h4>
+            </header>
+            <p>Files Supported: PNG, JPG, JPEG</p>
+            
+            <input type="file" hidden accept=".png,.jpg,.jpeg" id="ImgInput" style="display:none;">
+            <button class="btn">Choose File</button>
+
+        </div>
+
+        </div>
+      </div>
+
+    <!-- Scripts -->
+        <script src="{% static 'assets/js/upload.js' %}"></script>
+
+</html>
