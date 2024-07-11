@@ -1,0 +1,51 @@
+<!-- This is for testing 'POST' -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File</title>
+    <style>
+        body {
+            background-color: #1A2B48;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .upload-container {
+            background-color: #e0e7f1;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .upload-container h1 {
+            margin-bottom: 20px;
+        }
+        .upload-container input[type="file"] {
+            display: none;
+        }
+        .upload-container label {
+            background-color: #8b5c4a;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <h1>Upload Files</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <label for="file-upload">Choose File</label>
+            <input type="file" id="file-upload" name="file">
+            <br><br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -15,16 +15,70 @@
               <h4>Select File here</h4>
             </header>
             <p>Files Supported: PNG, JPG, JPEG</p>
+
+           <!--  
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <label for="file-upload" class="btn">Choose File</label>
+                <input type="file" id="file-upload" name="file" style="display:none;">
+                <br><br>
+                <button type="submit" class="btn">Upload</button>
+            </form>
+
             
-            <input type="file" hidden accept=".png,.jpg,.jpeg" id="ImgInput" style="display:none;">
-            <button class="btn">Choose File</button>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" @change="onFileChange">
+            </form>
+            -->
 
-        </div>
+            <label for="ImgInput" class="btn">Choose File</label>
+            <input type="file" hidden accept=".png,.jpg,.jpeg" id="ImgInput" style="display:none;" >
+            <!--<button type="button" class="btn" onclick="document.getElementById('ImgInput').click();">Choose File</button>-->
 
+            <script>
+                const dropArea = document.querySelector(".drop_box"),
+                input = document.querySelector("#ImgInput");
+
+                input.addEventListener("change", function (e) {
+                    var fileName = e.target.files[0].name;
+                    let form = document.createElement('form');
+                    form.action = '';
+                    form.method = 'post';
+                    form.enctype = 'multipart/form-data';
+
+                    let csrfToken = document.createElement('input');
+                    csrfToken.type = 'hidden';
+                    csrfToken.name = 'csrfmiddlewaretoken';
+                    csrfToken.value = '{{ csrf_token }}'; // Ensure the CSRF token is rendered correctly
+                    form.appendChild(csrfToken);
+
+                    //clone data in file before, and post the data 
+                    let fileInputClone = input.cloneNode();
+                    fileInputClone.removeAttribute('hidden');
+                    fileInputClone.name = 'file';
+                    form.appendChild(fileInputClone);
+
+                    let fileNameDisplay = document.createElement('h4');
+                    fileNameDisplay.innerHTML = `${fileName}<br><br>`;
+                    form.appendChild(fileNameDisplay);
+
+                    let uploadButton = document.createElement('button');
+                    uploadButton.type = 'submit';
+                    uploadButton.className = 'btn';
+                    uploadButton.innerText = 'Upload';
+                    form.appendChild(uploadButton);
+
+                    dropArea.innerHTML = '';
+                    dropArea.appendChild(form);
+
+                    alert('File selected and form ready to submit!');
+                });
+
+            </script>
+          </div>
         </div>
       </div>
-
-    <!-- Scripts -->
-        <script src="{% static 'assets/js/upload.js' %}"></script>
 
 </html>

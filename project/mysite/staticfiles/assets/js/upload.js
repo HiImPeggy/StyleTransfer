@@ -10,30 +10,18 @@ button.onclick = () => {
 };
 
 input.addEventListener("change", function (e) {
-  uploadFile(file);
+  var fileName = e.target.files[0].name;
+  let filedata = `
+    
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="file">
+            <h4>${fileName}</h4>
+            <button class="btn">Upload</button>
+        </div>
+    </form>`;
+  dropArea.innerHTML = filedata;
 });
 
-function uploadFile(file) {
-    const xhr = new XMLHttpRequest();
-    const url = "http://127.0.0.1:8000/admin"; // Replace with your server endpoint
-  
-    xhr.open("POST", url, true);
-  
-    xhr.upload.onprogress = function (e) {
-      const percentComplete = (e.loaded / e.total) * 100;
-      progressBar.style.width = percentComplete.toFixed(2) + "%";
-    };
-  
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        alert("File uploaded successfully!");
-      } else {
-        alert("File upload failed!");
-      }
-    };
-  
-    const formData = new FormData();
-    formData.append("file", file);
-  
-    xhr.send(formData);
-  }
+
+
+
