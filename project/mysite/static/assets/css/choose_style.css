@@ -1,0 +1,88 @@
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic");
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Allow the img and gallerybox to be stacked vertically */
+    justify-content: center;
+    align-items: center;
+    background: #2e3842;
+}
+
+.btn {
+    text-decoration: none;
+    background-color: #6c5b51;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+    margin-bottom: 20px;
+    
+  }
+  
+.btn:hover{
+    text-decoration: none;
+    background-color: #6c5b51;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    outline: 1px solid #010101;
+}
+
+.preview-container {
+    width: 80%;
+    height: 400px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ddd;
+}
+.preview-container img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-right: 50px
+}
+.image-container {
+    display: flex;
+    overflow-x: scroll;
+    white-space: nowrap;
+    width: 80%;
+}
+.image-container img {
+    height: 100px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border: 5px solid transparent; 
+    transition: border-color 0.3s ease; 
+}
+
+.image-container img.active {
+    border-color: #fff200; 
+}
+
+.image-container::-webkit-scrollbar {
+    
+    height: 8px;
+}
+.image-container::-webkit-scrollbar-thumb {
+    background: #888;
+    
+    border-radius: 6px;
+}
+.image-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
