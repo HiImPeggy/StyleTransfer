@@ -1,0 +1,184 @@
+
+<!DOCTYPE HTML>
+{% load static %}
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'assets/css/choose_style.css' %}" />
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="preview-container">
+                <img src="../static/media/{{file_path}}" alt="Preview Image" id="previewImage">
+                <img src="../static/thumbnails/style0.jpg" id="TransImage" style="display:none;" >
+            </div>
+
+            <label for="TransImage" class="btn" name="TransImage" onclick="runTrans()">Run</label>
+
+            <div class="image-container" id="imageContainer">
+                <img src="../static/thumbnails/style0.jpg" onclick="previewImage('../static/thumbnails/style0.jpg')" >
+                <img src="../static/thumbnails/style1.jpg" onclick="previewImage('../static/thumbnails/style1.jpg')">
+                <img src="../static/thumbnails/style2.jpg" onclick="previewImage('../static/thumbnails/style2.jpg')">
+                <img src="../static/thumbnails/style3.jpg" onclick="previewImage('../static/thumbnails/style3.jpg')">
+                <img src="../static/thumbnails/style4.jpg" onclick="previewImage('../static/thumbnails/style4.jpg')">
+                <img src="../static/thumbnails/style5.jpg" onclick="previewImage('../static/thumbnails/style5.jpg')">
+                <img src="../static/thumbnails/style6.jpg" onclick="previewImage('../static/thumbnails/style6.jpg')">
+                <img src="../static/thumbnails/style7.jpg" onclick="previewImage('../static/thumbnails/style7.jpg')">
+                <img src="../static/thumbnails/style8.jpg" onclick="previewImage('../static/thumbnails/style8.jpg')">
+                <img src="../static/thumbnails/style9.jpg" onclick="previewImage('../static/thumbnails/style9.jpg')">
+                <img src="../static/thumbnails/style10.jpg" onclick="previewImage('../static/thumbnails/style10.jpg')">
+                <img src="../static/thumbnails/style11.jpg" onclick="previewImage('../static/thumbnails/style11.jpg')">
+                <img src="../static/thumbnails/style12.jpg" onclick="previewImage('../static/thumbnails/style12.jpg')">
+                <img src="../static/thumbnails/style13.jpg" onclick="previewImage('../static/thumbnails/style13.jpg')">
+                <img src="../static/thumbnails/style14.jpg" onclick="previewImage('../static/thumbnails/style14.jpg')">
+                <img src="../static/thumbnails/style15.jpg" onclick="previewImage('../static/thumbnails/style15.jpg')">
+                <img src="../static/thumbnails/style16.jpg" onclick="previewImage('../static/thumbnails/style16.jpg')">
+                <img src="../static/thumbnails/style17.jpg" onclick="previewImage('../static/thumbnails/style17.jpg')">
+                <img src="../static/thumbnails/style18.jpg" onclick="previewImage('../static/thumbnails/style18.jpg')">
+                <img src="../static/thumbnails/style19.jpg" onclick="previewImage('../static/thumbnails/style19.jpg')">
+                <img src="../static/thumbnails/style20.jpg" onclick="previewImage('../static/thumbnails/style20.jpg')">
+                <img src="../static/thumbnails/style21.jpg" onclick="previewImage('../static/thumbnails/style21.jpg')">
+                <img src="../static/thumbnails/style22.jpg" onclick="previewImage('../static/thumbnails/style22.jpg')">
+                <img src="../static/thumbnails/style23.jpg" onclick="previewImage('../static/thumbnails/style23.jpg')">
+                <img src="../static/thumbnails/style24.jpg" onclick="previewImage('../static/thumbnails/style24.jpg')">
+                <img src="../static/thumbnails/style25.jpg" onclick="previewImage('../static/thumbnails/style25.jpg')">
+            </div>    
+        </div>
+        
+        <!-- Scripts -->
+            <script src="{% static 'assets/js/choose_style.js' %}"></script>
+            
+            
+            <script>
+                function runTrans() {
+                    var selectedImage = document.querySelector('.image-container img.active');
+
+                    if (selectedImage) {
+                        var selectedImageUrl = selectedImage.src;
+                        console.log('Selected Image URL:', selectedImageUrl);
+                        alert('Selected Image URL: ' + selectedImageUrl);
+
+                        let form = document.createElement('form');
+                        form.action = '/chosen/'; // 设置为你希望发送POST请求的Django视图的URL
+                        form.method = 'post';
+                        form.enctype = 'multipart/form-data';
+
+                        // 添加CSRF令牌
+                        let csrfToken = document.createElement('input');
+                        csrfToken.type = 'hidden';
+                        csrfToken.name = 'csrfmiddlewaretoken';
+                        csrfToken.value = '{{ csrf_token }}'; // 确保CSRF令牌正确渲染
+                        form.appendChild(csrfToken);
+
+                        // 添加选定的图片URL
+                        let imageUrlField = document.createElement('input');
+                        imageUrlField.type = 'hidden';
+                        imageUrlField.name = 'selected_image_url';
+                        imageUrlField.value = selectedImageUrl;
+                        form.appendChild(imageUrlField);
+
+                        // 将表单添加到DOM中
+                        document.body.appendChild(form);
+
+                        // 提交表单
+                        form.submit();
+
+
+                    } else {
+                        alert('Please select an image first.');
+                    }
+                }
+                
+            </script>
+            
+        
+    </body>
+</html>
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Scroller with Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* Allow the img and gallerybox to be stacked vertically */
+            justify-content: center;
+            align-items: center;
+            background: #2e3842;
+        }
+
+        .preview-container {
+            width: 80%;
+            height: 400px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ddd;
+        }
+        .preview-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .image-container {
+            display: flex;
+            overflow-x: scroll;
+            white-space: nowrap;
+            width: 80%;
+        }
+        .image-container img {
+            height: 100px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .image-container::-webkit-scrollbar {
+            height: 12px;
+        }
+        .image-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 6px;
+        }
+        .image-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="preview-container">
+            <img src="../static/media/uploads/{{file_path}}" alt="Preview Image" id="previewImage">
+            
+        </div>
+        <div class="image-container">
+    
+            <img src="../static/thumbnails/style0.jpg" onclick="previewImage('../static/thumbnails/style0.jpg')">
+            <img src="../static/thumbnails/style1.jpg" onclick="previewImage('../static/thumbnails/style1.jpg')">
+            <img src="../static/thumbnails/style2.jpg" onclick="previewImage('../static/thumbnails/style2.jpg')">
+            <img src="../static/thumbnails/style3.jpg" onclick="previewImage('../static/thumbnails/style3.jpg')">
+        </div>    
+    </div>
+    
+    <script>
+        function previewImage(src) {
+            document.getElementById('previewImage').src = src;
+        }
+    </script>
+</body>
+</html>
+-->
