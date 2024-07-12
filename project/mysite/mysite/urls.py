@@ -16,14 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from StyleTrans.views import menu, upload
+from StyleTrans.views import menu, upload, ChooseStyle, chosen
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("menu/", menu, name='menu'),
-    path("upload/",upload,name='upload')
+    path("upload/",upload,name='upload'),
+    path("choose_style/",ChooseStyle,name='ChooseStyle'),
+    path("chosen/",chosen,name='chosen')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
