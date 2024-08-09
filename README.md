@@ -21,3 +21,8 @@ Demo:
 (4) model.py 中，定義上傳的資料形式，並且定義上傳的路徑為何 ( 在此是將圖片儲存於 static/media/uploads )。form.py 中，定義的是圖片在後台儲存的形式。
 
 ![image](https://github.com/user-attachments/assets/c4840ded-9e8d-4d2f-a049-2d18076393aa)
+
+
+model from https://github.com/nazianafis/Neural-Style-Transfer/tree/main
+
+有關 model 的解說可參考： https://medium.com/geekculture/a-lightweight-pytorch-implementation-of-neural-style-transfer-86603e5eb551
